@@ -8,35 +8,40 @@ import { Link } from 'react-router-dom';
  * @class
  */
 class BookSearch extends Component {
-	state = {
-		query: ''   // the query bar's value
-	};
-
 	render() {
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
 					<Link to="/" className="close-search">Close</Link>
 					<div className="search-books-input-wrapper">
-						{/*
-					NOTES: The search from BooksAPI is limited to a particular set of search terms.
-					You can find these search terms here:
-					https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-					However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-					you don't find a specific author or title. Every search is limited by search terms.
-					*/}
-						<input type="text" placeholder="Search by title or author" />
+						<input type="text" placeholder="Search by title or author" onChange={ (e) => this.props.handleQuery(e.target.value)} value={this.props.query} />
 					</div>
 				</div>
-				<BookSearchResult books={this.props.books}/>
+				{
+					// prevent the screen showing anything while the remote search is being performed
+					(!this.props.isSearching &&
+					<BookSearchResult
+						books={this.props.books}
+						error={this.props.error}
+						shelves={this.props.shelves}
+						handleBookShelfSelect={this.props.handleBookShelfSelect}
+					/>
+					)
+				}
 			</div>
 		);
 	}
 }
 
 BookSearch.propTypes = {
-	books: PropTypes.array.isRequired   // array of the user's books
+	books: PropTypes.array.isRequired,								// array of the user's books
+	shelves: PropTypes.array.isRequired,							// array of BookShelf
+	query: PropTypes.string.isRequired,								// the query term
+	isSearching: PropTypes.bool.isRequired,						// is the app searching the remote database
+	result: PropTypes.array,													// the search result
+	error: PropTypes.string,													// was there a search error?
+	handleQuery: PropTypes.func.isRequired,						// handler for the query
+	handleBookShelfSelect: PropTypes.func.isRequired	// handler for selecting a bookshelf
 };
 
 export default BookSearch;

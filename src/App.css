@@ -103,6 +103,12 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
+.search-books-results-error {
+	font-size: 1.25em;
+	color: #ccc;
+	text-align: center;
+}
+
 /* books grid */
 
 .books-grid {
@@ -122,6 +128,11 @@ body, .app {
 .book {
 	width: 140px;
 }
+.book-cover {
+	width: 128px;
+	height: 193px;
+}
+
 .book-title,
 .book-authors {
   font-size: 0.8em;
@@ -138,6 +149,16 @@ body, .app {
   height: 200px;
   display: flex;
   align-items: flex-end;
+}
+
+.book-shelf-name {
+	position: absolute;
+	top:0;
+	left:0;
+	background:rgba(204,255,204,0.8);
+	width:128px;
+	text-align: center;
+	padding:10px;
 }
 
 .book-shelf-changer {
