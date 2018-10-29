@@ -23,7 +23,7 @@ const BookShelfList = props => {
 			</div>
 		</div>
 	);
-}
+};
 
 BookShelfList.propTypes = {
 	shelves: PropTypes.array.isRequired,							// array of BookShelf
