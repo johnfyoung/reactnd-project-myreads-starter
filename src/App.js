@@ -137,37 +137,33 @@ class BooksApp extends Component {
 	render() {
 		return (
 			<div className="app">
-				{
-					<div>
-						<Route exact path="/" render={ () => (
-							<div className="list-books">
-								<div className="list-books-title">
-									<h1>MyReads</h1>
-								</div>
-								<BookShelfList
-									shelves={bookShelves}
-									books={this.state.books}
-									handleBookShelfSelect={this.handleBookShelfSelect}
-								/>
-								<div className="open-search">
-									<Link to="/search">Add a book</Link>
-								</div>
-							</div >
-						)} />
+				<Route exact path="/" render={ () => (
+					<div className="list-books">
+						<div className="list-books-title">
+							<h1>MyReads</h1>
+						</div>
+						<BookShelfList
+							shelves={bookShelves}
+							books={this.state.books}
+							handleBookShelfSelect={this.handleBookShelfSelect}
+						/>
+						<div className="open-search">
+							<Link to="/search">Add a book</Link>
+						</div>
+					</div >
+				)} />
 
-						<Route exact path="/search" render={() => (
-							<BookSearch
-								books={this.state.result}
-								query={this.state.query}
-								error={this.state.error}
-								shelves={bookShelves}
-								isSearching={this.state.isSearching}
-								handleQuery={this.handleQuery}
-								handleBookShelfSelect={this.handleBookShelfSelect}
-							/>
-						)}/>
-					</div>
-				}
+				<Route key="screen-search" exact path="/search" render={() => (
+					<BookSearch
+						books={this.state.result}
+						query={this.state.query}
+						error={this.state.error}
+						shelves={bookShelves}
+						isSearching={this.state.isSearching}
+						handleQuery={this.handleQuery}
+						handleBookShelfSelect={this.handleBookShelfSelect}
+					/>
+				)}/>
 			</div>
 		);
 	}
