@@ -40,18 +40,20 @@ class BooksApp extends Component {
 
 	/**
 	 * @description handle when a book shelf is selected for a particular book
-	 * @param string bookID - a book's id property
+	 * @param Object book - a Book
 	 * @param string shelfID - a shelf's id property
 	 */
-	handleBookShelfSelect = ( bookID, shelfID ) => {
-		this.setState( prevState => ({
-			books: prevState.books.map( b => {
-				if(b.id === bookID) {
-					b.shelf = shelfID;
-				}
-				return b;
-			})
-		}));
+	handleBookShelfSelect = ( book, shelfID ) => {
+		BooksAPI.update(book, shelfID).then(()=> {
+			this.setState( prevState => ({
+				books: prevState.books.map( b => {
+					if(b.id === book.id) {
+						b.shelf = shelfID;
+					}
+					return b;
+				})
+			}));
+		});
 	};
 
 	render() {
