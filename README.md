@@ -22,6 +22,8 @@ The app utilizes 5 sub-components:
 1. `Book`
   This is also a stateless component. It seemed easiest to maintain state about where to display a book outside of the books.
 
+
+
 ---
 
 ## About the starter template
