@@ -1,37 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import BookSearchResult from './BookSearchResult';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import DebounceInput from 'react-debounce-input';
 
 /**
- * @description Stateful Coponent representing a Book search, including a query bar and search results
+ * @description Statless Component representing a Book search, including a query bar and search results
  * @class
  */
-class BookSearch extends Component {
-	render() {
-		return (
-			<div className="search-books">
-				<div className="search-books-bar">
-					<Link to="/" className="close-search">Close</Link>
-					<div className="search-books-input-wrapper">
-						<input type="text" placeholder="Search by title or author" onChange={ (e) => this.props.handleQuery(e.target.value)} value={this.props.query} />
-					</div>
+const BookSearch = (props) => {
+	return (
+		<div className="search-books">
+			<div className="search-books-bar">
+				<Link to="/" className="close-search">Close</Link>
+				<div className="search-books-input-wrapper">
+					<DebounceInput type="text" placeholder="Search by title or author" debounceTimeout={500} onChange={ (e) => props.handleQuery(e.target.value)} value={props.query} />
 				</div>
-				{
-					// prevent the screen showing anything while the remote search is being performed
-					(!this.props.isSearching &&
-					<BookSearchResult
-						books={this.props.books}
-						error={this.props.error}
-						shelves={this.props.shelves}
-						handleBookShelfSelect={this.props.handleBookShelfSelect}
-					/>
-					)
-				}
 			</div>
-		);
-	}
-}
+			{
+				// prevent the screen showing anything while the remote search is being performed
+				(!props.isSearching &&
+				<BookSearchResult
+					books={props.books}
+					error={props.error}
+					shelves={props.shelves}
+					handleBookShelfSelect={props.handleBookShelfSelect}
+				/>
+				)
+			}
+		</div>
+	);
+};
 
 BookSearch.propTypes = {
 	books: PropTypes.array.isRequired,								// array of the user's books
