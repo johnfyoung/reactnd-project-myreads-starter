@@ -1,7 +1,7 @@
 
 # MyReads Project
 
-My submission for the MyReads project began with the starter project template.
+Maintain a list of books.
 
 ## State Management
 
